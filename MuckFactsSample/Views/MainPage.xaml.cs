@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MuckFactsSample.Models;
 using Xamarin.Forms;
 
 namespace MuckFactsSample
@@ -18,7 +19,7 @@ namespace MuckFactsSample
             InitializeComponent();
         }
 
-        void OnSelection(object sender, SelectedItemChangedEventArgs e)
+      /*  void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
@@ -26,6 +27,12 @@ namespace MuckFactsSample
             }
             MuckFactData fact = (MuckFactData)e.SelectedItem;
             DisplayAlert("The Fact", fact.TheFact, "Ok");
+        }*/
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            listView.ItemsSource = await App.Database.GetItemsAsync();
         }
     }
 }
